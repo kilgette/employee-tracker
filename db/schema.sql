@@ -42,9 +42,9 @@ INSERT INTO department (dept_name)
         ("Electric Mayhem");
 
 INSERT INTO role (title, salary, department_id)
-  VALUES ("Intern", 5000, 1),
-        ("Engineer", 20000, 1),
-       ("Manager", 30000, 3);
+  VALUES ("Intern", 50000, 1),
+        ("Engineer", 100000, 1),
+       ("Manager", 1300000, 3);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
   VALUES  ("Bunsen", "Honeydew", 3, 1),
