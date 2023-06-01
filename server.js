@@ -8,9 +8,10 @@ const selectEmployeeSQL = "SELECT * FROM EMPLOYEE;";
 
 // Connect to the database
 const connection = mysql.createConnection({
+  password: "SQL!2468",
   host: '127.0.0.1',
   user: 'root',
-  database: 'sys',
+  database: 'company_db',
   waitForConnections: true,
   connectionLimit: 10,
   maxIdle: 10,
@@ -25,6 +26,7 @@ function viewAllDepartments() {
       return;
     }
     console.table(results);
+    init()
   });
 }
 
@@ -35,6 +37,7 @@ function viewAllRoles() {
       return;
     }
     console.table(results);
+    init()
   });
 }
 
@@ -45,36 +48,40 @@ function viewAllEmployees() {
       return;
     }
     console.table(results);
+    init()
   });
 }
 
 function insertDepartment(id, name) {
-  connection.query(`INSERT INTO DEPARTMENT(id, name) VALUES (${id}, '${name}')`, function (err, results, fields) {
+  connection.query(`INSERT INTO DEPARTMENT(dept_name) VALUES ( '${name}')`, function (err, results, fields) {
     if (err) {
       console.log("An error occurred while adding the department!");
       return;
     }
     console.log("Department successfully added!");
+    init()
   });
 }
 
 function insertRole(id, title, salary, departmentId) {
-  connection.query(`INSERT INTO ROLE(id, title, salary, department_id) VALUES (${id}, '${title}', ${salary}, ${departmentId})`, function (err, results, fields) {
+  connection.query(`INSERT INTO ROLE(id, title, salary, department_id) VALUES ( '${title}', ${salary}, ${departmentId})`, function (err, results, fields) {
     if (err) {
       console.log("An error occurred while adding the role!");
       return;
     }
     console.log("Role successfully added!");
+    init()
   });
 }
 
 function insertEmployee(id, firstName, lastName, roleId, managerId = null) {
-  connection.query(`INSERT INTO EMPLOYEE(id, first_name, last_name, role_id, manager_id) VALUES (${id}, '${firstName}', '${lastName}', ${roleId}, ${managerId})`, function (err, results, fields) {
+  connection.query(`INSERT INTO EMPLOYEE(id, first_name, last_name, role_id, manager_id) VALUES ('${firstName}', '${lastName}', ${roleId}, ${managerId})`, function (err, results, fields) {
     if (err) {
       console.log("An error occurred while adding the employee!");
       return;
     }
     console.log("Employee successfully added!");
+    init()
   });
 }
 
@@ -87,6 +94,10 @@ function updateEmployee(id, roleId) {
     console.log("Employee role successfully updated!");
   });
 }
+function init(){
+
+
+
 
 inquirer.prompt([
   {
@@ -199,3 +210,6 @@ inquirer.prompt([
       break;
   }
 });
+}
+init();
+
